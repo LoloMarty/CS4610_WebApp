@@ -15,7 +15,8 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Who's idea was it to force CS student's that haven't deployed anything
+          before a NETWORK BASED CHAT APP?
         </a>
       </header>
     </div>
