@@ -4,22 +4,10 @@ import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Who's idea was it to force CS student's that haven't deployed anything
-          before a NETWORK BASED CHAT APP?
-        </a>
-      </header>
-    </div>
+    <>
+      <h1>Welcome to Rettiwt</h1>
+      <h3>Project by Marvin, Nathan, Jonathan, and Carlos</h3>
+    </>
   );
 }
 
