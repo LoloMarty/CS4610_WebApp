@@ -5,8 +5,8 @@ import "./App.css";
 function App() {
   return (
     <>
-      <h1>Welcome to Rettiwt</h1>
-      <h3>Project by Marvin, Nathan, Jonathan, and Carlos</h3>
+      <h1>This is a general test branch</h1>
+      <h3>Feel free to test changes here</h3>
     </>
   );
 }
