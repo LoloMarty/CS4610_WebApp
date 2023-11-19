@@ -1,5 +1,4 @@
 import React from "react";
-import MessageInput from "./message";
 import logo from "./Assets/RettiwtLogo.png";
 import ChatRoom from "./Pages/ChatRoom";
 import {
@@ -23,7 +22,6 @@ function App() {
         </svg>
       </Link>
       <Link to="/ChatRoom">ChatRoom</Link>
-      <MessageInput />
       <Routes>
         <Route path="/ChatRoom" element={<ChatRoom />} />
       </Routes>
