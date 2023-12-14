@@ -1,28 +1,32 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
-import Login from "./routes/Login"
-import Update from "./routes/Update"
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { CookiesProvider, useCookies } from "react-cookie";
+
 import User from "./routes/User"
+import Login from "./routes/Login"
 import Register from "./routes/Register"
 import Home from "./routes/Home"
 import New from "./routes/New"
-import { UsersContextProvider } from "./context/UsersContext";
 
 const App = () => {
+	const [cookies, setCookie] = useCookies(["token"]);
+
+	function handleLogin(token) {
+		setCookie("token", token, { path: "/" });
+	}
+
+	const router = createBrowserRouter([
+		{
+			path: "/",
+			element: <Home />,
+			errorElement: <p>404!</p>,
+		},
+	])
+
 	return (
-		<UsersContextProvider>
-			<div>
-				<Router>
-					<Routes>
-						<Route exact path="/user/:username" Component={User} />
-						<Route exact path="/test/login" Component={Login} />
-						<Route exact path="/test/register" Component={} />
-						<Route exact path="/test/home" Component={} />
-						<Route exact path="/test/new" Component={} />
-					</Routes>
-				</Router>
-			</div>
-		</UsersContextProvider>
+		<CookiesProvider>
+			<RouterProvider router={router} />
+		</CookiesProvider>
 	)
 }
 

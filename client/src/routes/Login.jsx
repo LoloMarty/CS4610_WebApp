@@ -1,17 +1,15 @@
 import React from "react";
 import Header from "../components/Header";
-import AddUser from "../components/Register";
-import UserList from "../components/UserList";
 
-const Login = () =>
-{
+export default function Login({onLogin}) {
+	function handleSubmit(event) {
+		event.preventDefault();
+		onLogin({ token });
+	  }
+
 	return (
-	<div>
-		<Header />
-		<AddUser />
-		<UserList />
-	</div>
+		<div>
+			
+		</div>
 	);
 };
-
-export default Login

@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom';
-import api from '../api/api'
-import Header from "../components/Header";
+    import React, { useState, useEffect } from 'react'
+    import { useParams } from 'react-router-dom';
+    import api from '../api/api'
+    import Header from "../components/Header";
 
 export default function User() {
     const { username } = useParams();
