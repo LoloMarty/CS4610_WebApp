@@ -1,9 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
-    return (
-        <div>
-            <sub>Rettiwt is made with ❤️ by Small Data & Ground Computing</sub>
-        </div>
-    )
+  return (
+    <div>
+      <sub>
+        Rettiwt is made with ❤️ by Small Data & Ground Computing{" "}
+        <Link>=logout=</Link>
+      </sub>
+    </div>
+  );
 }
