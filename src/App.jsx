@@ -1,6 +1,6 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { CookiesProvider, useCookies } from "react-cookie";
+import Cookies from "universal-cookie";
 
 import Welcome from "./routes/Welcome";
 import User from "./routes/User";
@@ -10,10 +10,10 @@ import Home from "./routes/Home";
 import New from "./routes/New";
 
 export default function App() {
-  const [cookies, setCookie] = useCookies(["token"]);
+  const cookies = new Cookies();
 
   function handleLogin(token) {
-    setCookie("token", token, { path: "/" });
+    cookies.set("token", token, { path: "/" });
   }
 
   const router = createBrowserRouter([
@@ -24,7 +24,7 @@ export default function App() {
     },
     {
       path: "/user/:username",
-      element: <User token={cookies.token.token} />,
+      element: <User token={cookies.get("token").token} />,
     },
     {
       path: "/login",
@@ -36,17 +36,13 @@ export default function App() {
     },
     {
       path: "/home",
-      element: <Home token={cookies.token.token} />,
+      element: <Home token={cookies.get("token").token} />,
     },
     {
       path: "/new",
-      element: <New token={cookies.token.token} />,
+      element: <New token={cookies.get("token").token} />,
     },
   ]);
 
-  return (
-    <CookiesProvider>
-      <RouterProvider router={router} />
-    </CookiesProvider>
-  );
+  return <RouterProvider router={router} />;
 }
