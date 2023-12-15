@@ -1,12 +1,45 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Footer() {
+  const navigate = useNavigate();
+
+  function handleProfile(event) {
+    event.preventDefault();
+    navigate("/me");
+  }
+  function handleNew(event) {
+    event.preventDefault();
+    navigate("/new");
+  }
+
+  function handleLogout(event) {
+    event.preventDefault();
+    localStorage.removeItem("token");
+    navigate("/");
+  }
   return (
     <div>
       <sub>
-        Rettiwt is made with ❤️ by Small Data & Ground Computing{" "}
-        <Link>=logout=</Link>
+        Rettiwt is made with ❤️ by Small Data & Ground Computing
+        <br />
+        {localStorage.getItem("token") ? (
+          <div>
+            <form onSubmit={handleProfile}>
+              <input type="submit" value="Profile" />
+            </form>
+
+            <form onSubmit={handleNew}>
+              <input type="submit" value="New Message" />
+            </form>
+
+            <form onSubmit={handleLogout}>
+              <input type="submit" value="Logout" />
+            </form>
+          </div>
+        ) : (
+          <div />
+        )}
       </sub>
     </div>
   );

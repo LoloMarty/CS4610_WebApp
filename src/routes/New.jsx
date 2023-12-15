@@ -3,11 +3,12 @@ import { useNavigate } from "react-router-dom";
 import api from "../api/api";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-export default function New({ token }) {
+export default function New() {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
   function handleSubmit(event) {
     event.preventDefault();
+    const token = localStorage.getItem("token");
     api
       .post(`/new`, null, {
         params: {

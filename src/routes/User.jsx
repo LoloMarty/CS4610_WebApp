@@ -5,7 +5,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Follow from "../components/Follow";
 
-export default function User({ token }) {
+export default function User() {
   const { username } = useParams();
   const [data, setData] = useState("");
 
@@ -16,13 +16,6 @@ export default function User({ token }) {
     };
     fetchData();
   }, []);
-
-  //   return (
-  //     <div>
-  //       <Header />
-  //       <Feed data={data} />
-  //     </div>
-  //   );
 
   function format() {
     var arr = [];
@@ -36,7 +29,7 @@ export default function User({ token }) {
     <div>
       <Header />
       <h3>{username}'s messages:</h3>
-      {token ? <Follow token={token} followingName={username} /> : <div />}
+      <Follow followingName={username} />
       {format().map((value) => (
         <div>
           <p>{value.message}</p>

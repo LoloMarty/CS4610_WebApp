@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Cookies from "universal-cookie";
 
@@ -8,12 +8,25 @@ import Login from "./routes/Login";
 import Register from "./routes/Register";
 import Home from "./routes/Home";
 import New from "./routes/New";
+import Me from "./routes/Me";
 
 export default function App() {
-  const cookies = new Cookies();
+  const [token, setToken] = useState("");
 
-  function handleLogin(token) {
-    cookies.set("token", token, { path: "/" });
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+    console.log("storedToken value", storedToken);
+    if (storedToken) {
+      setToken(storedToken);
+      console.log("token should be the following: ", storedToken);
+    }
+  }, []);
+
+  function handleLogin(newToken) {
+    console.log("Token received from login");
+    console.log(newToken);
+    localStorage.setItem("token", newToken.token);
+    setToken(newToken.token);
   }
 
   const router = createBrowserRouter([
@@ -24,7 +37,7 @@ export default function App() {
     },
     {
       path: "/user/:username",
-      element: <User token={cookies.get("token").token} />,
+      element: <User />,
     },
     {
       path: "/login",
@@ -36,11 +49,15 @@ export default function App() {
     },
     {
       path: "/home",
-      element: <Home token={cookies.get("token").token} />,
+      element: <Home />,
     },
     {
       path: "/new",
-      element: <New token={cookies.get("token").token} />,
+      element: <New />,
+    },
+    {
+      path: "/me",
+      element: <Me />,
     },
   ]);
 

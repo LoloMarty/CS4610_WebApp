@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from "react";
 import api from "../api/api";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import Delete from "../components/Delete";
 
-export default function Home() {
+export default function Me() {
   const [data, setData] = useState("");
   const navigate = useNavigate();
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
-      navigate("/");
+      navigate("/login");
     }
-    console.log("Home.jsx token", token);
     if (token) {
       const fetchData = async () => {
-        const response = await api.post(`/home`, null, { params: { token } });
+        const response = await api.post(`/me`, null, { params: { token } });
         setData(response.data);
       };
       fetchData();
@@ -29,17 +29,14 @@ export default function Home() {
     }
     return arr;
   }
-
   return (
     <div>
       <Header />
       {format().map((value) => (
         <div>
-          <h3>
-            <Link to={`/user/${value.username}`}> {value.username}</Link>
-          </h3>
+          <h3>At {value.timestamp} you messaged</h3>
           <p>{value.message}</p>
-          <sub>At {value.timestamp}</sub>
+          <Delete messageID={value.messageid} />
         </div>
       ))}
       <Footer />

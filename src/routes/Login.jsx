@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import api from "../api/api";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
@@ -9,25 +9,34 @@ export default function Login({ onLogin }) {
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
-
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/home");
+    }
+  }, []);
   function handleSubmit(event) {
     event.preventDefault();
-    api
-      .post(`/login`, null, {
-        params: {
-          username,
-          password,
-        },
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .then((value) => {
-        const token = value.data.toString();
-        console.log(value.data.toString());
-        onLogin({ token });
-        navigate("/home");
-      });
+    if (username && password) {
+      api
+        .post(`/login`, null, {
+          params: {
+            username,
+            password,
+          },
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .then((value) => {
+          const token = value.data;
+          console.log("Login.jsx token");
+          console.log(value.data);
+          localStorage.setItem("token", token);
+          //onLogin({ token });
+          navigate("/home");
+        });
+    }
   }
 
   return (

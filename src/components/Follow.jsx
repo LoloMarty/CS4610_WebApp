@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import api from "../api/api";
 
-export default function Follow({ token, followingName }) {
+export default function Follow({ followingName }) {
   const [state, setState] = useState("");
   const [text, setText] = useState("");
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
     const fetchData = async () => {
       const response = await api.post(`/followstate`, null, {
         params: { token, followingName },
@@ -23,6 +24,7 @@ export default function Follow({ token, followingName }) {
 
   function handleSubmit(event) {
     event.preventDefault();
+    const token = localStorage.getItem("token");
     api
       .post(`/followtoggle`, null, {
         params: { token, followingName },
@@ -42,10 +44,13 @@ export default function Follow({ token, followingName }) {
 
   return (
     <div>
-      {" "}
-      <form onSubmit={handleSubmit}>
-        <input type="submit" value={text} />
-      </form>
+      {localStorage.getItem("token") ? (
+        <form onSubmit={handleSubmit}>
+          <input type="submit" value={text} />
+        </form>
+      ) : (
+        <div />
+      )}
     </div>
   );
 }
