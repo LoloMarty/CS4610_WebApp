@@ -14,7 +14,7 @@ export default function Delete({ messageID }) {
       })
       .then((value) => {
         console.log(value);
-        navigate(0);
+        navigate(`/home`);
       });
   }
 
