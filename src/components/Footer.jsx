@@ -18,6 +18,11 @@ export default function Footer() {
     localStorage.removeItem("token");
     navigate("/");
   }
+
+  function handleUsers(event) {
+    event.preventDefault();
+    navigate("/users");
+  }
   return (
     <div>
       <sub>
@@ -35,6 +40,10 @@ export default function Footer() {
 
             <form onSubmit={handleLogout}>
               <input type="submit" value="Logout" />
+            </form>
+
+            <form onSubmit={handleUsers}>
+              <input type="submit" value="Users" />
             </form>
           </div>
         ) : (

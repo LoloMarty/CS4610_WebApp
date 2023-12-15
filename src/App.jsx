@@ -9,6 +9,7 @@ import Register from "./routes/Register";
 import Home from "./routes/Home";
 import New from "./routes/New";
 import Me from "./routes/Me";
+import Users from "./routes/Users";
 
 export default function App() {
   const [token, setToken] = useState("");
@@ -58,6 +59,10 @@ export default function App() {
     {
       path: "/me",
       element: <Me />,
+    },
+    {
+      path: "/users",
+      element: <Users />,
     },
   ]);
 
