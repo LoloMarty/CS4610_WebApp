@@ -44,13 +44,9 @@ export default function Follow({ followingName }) {
 
   return (
     <div>
-      {localStorage.getItem("token") ? (
-        <form onSubmit={handleSubmit}>
-          <input type="submit" value={text} />
-        </form>
-      ) : (
-        <div />
-      )}
+      <form onSubmit={handleSubmit}>
+        <input type="submit" value={text} />
+      </form>
     </div>
   );
 }

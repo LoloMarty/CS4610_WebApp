@@ -29,7 +29,11 @@ export default function User() {
     <div>
       <Header />
       <h3>{username}'s messages:</h3>
-      <Follow followingName={username} />
+      {localStorage.getItem("token") ? (
+        <Follow followingName={username} />
+      ) : (
+        <div />
+      )}
       {format().map((value) => (
         <div>
           <p>{value.message}</p>
